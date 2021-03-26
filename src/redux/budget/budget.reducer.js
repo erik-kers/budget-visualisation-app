@@ -1,0 +1,29 @@
+import budgetActionTypes from './budget.types';
+
+const INITIAL_STATE = {
+  data: [],
+};
+
+const BudgetReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case budgetActionTypes.ADD_ROW:
+      return {
+        ...state,
+        data: [...state.data, { id: '', amount: 0, key: action.payload.key }],
+      };
+    case budgetActionTypes.DELETE_ROW:
+      return {
+        ...state,
+        data: state.data.slice(0, state.data.length - 1),
+      };
+    case budgetActionTypes.UPDATE_ROW:
+      return {
+        ...state,
+        data: state.data.map((row) => (state.data.key === action.payload.key ? { ...row, ...action.payload } : row)),
+      };
+    default:
+      return state;
+  }
+};
+
+export default BudgetReducer;
