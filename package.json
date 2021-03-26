@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@nivo/core": "^0.67.0",
+    "@nivo/pie": "^0.67.0",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -13,6 +15,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.2.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
