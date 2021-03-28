@@ -9,7 +9,7 @@ const BudgetReducer = (state = INITIAL_STATE, action) => {
     case budgetActionTypes.ADD_ROW:
       return {
         ...state,
-        data: [...state.data, { id: '', amount: 0, key: action.payload.key }],
+        data: [...state.data, { id: '', label: '', value: 0, key: action.payload }],
       };
     case budgetActionTypes.DELETE_ROW:
       return {
@@ -19,7 +19,7 @@ const BudgetReducer = (state = INITIAL_STATE, action) => {
     case budgetActionTypes.UPDATE_ROW:
       return {
         ...state,
-        data: state.data.map((row) => (state.data.key === action.payload.key ? { ...row, ...action.payload } : row)),
+        data: state.data.map((row) => (row.key === action.payload.key ? { ...row, ...action.payload } : row)),
       };
     default:
       return state;

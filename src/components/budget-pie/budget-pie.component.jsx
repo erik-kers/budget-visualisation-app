@@ -1,58 +1,11 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const PiePan = styled.div`
   height: 600px;
 `;
-
-const data = [
-  {
-    id: 'hyra',
-    label: 'hyra',
-    value: 10000,
-  },
-  {
-    id: 'mat',
-    label: 'mat',
-    value: 3500,
-  },
-  {
-    id: 'nöjen',
-    label: 'nöjen',
-    value: 2000,
-  },
-  {
-    id: 'kläder',
-    label: 'kläder',
-    value: 1500,
-  },
-  {
-    id: 'sparande',
-    label: 'sparande',
-    value: 1200,
-  },
-  {
-    id: 'resor',
-    label: 'resor',
-    value: 2500,
-  },
-  {
-    id: 'media',
-    label: 'media',
-    value: 500,
-  },
-  {
-    id: 'el',
-    label: 'el',
-    value: 1000,
-  },
-  {
-    id: 'Återstående belop',
-    label: 'Återstående belopp',
-    value: 6000,
-  },
-];
 
 const generateFills = (chartData) => {
   const patterns = ['squares', 'dots', 'lines'];
@@ -75,7 +28,9 @@ const generateFills = (chartData) => {
 };
 
 const BudgetPie = () => {
+  const data = useSelector((state) => state.budget.data.filter((row) => row.value));
   const fills = generateFills(data);
+
   return (
     <PiePan>
       <ResponsivePie

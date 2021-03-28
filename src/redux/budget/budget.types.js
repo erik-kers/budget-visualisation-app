@@ -1,6 +1,6 @@
 const budgetActionTypes = {
-  ADD_ROW: 'TOGGLE_SIDE_DRAWER',
-  REMOVE_ROW: 'REMOVE_ROW',
+  ADD_ROW: 'ADD_ROW',
+  DELETE_ROW: 'DELETE_ROW',
   UPDATE_ROW: 'UPDATE_ROW',
 };
 
