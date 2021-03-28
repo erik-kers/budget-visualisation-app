@@ -1,45 +1,44 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
+import BudgetRow from '../budget-row/budget-row.component';
+import budgetActionTypes from '../../redux/budget/budget.types';
 
-const BudgetTable = () => (
-  <TableContainer>
-    <Table aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Cost</TableCell>
-          <TableCell>Lock?</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        <TableRow>
-          <TableCell>Hyra</TableCell>
-          <TableCell>10000</TableCell>
-          <TableCell>Locked</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mat</TableCell>
-          <TableCell>2000</TableCell>
-          <TableCell>Locked</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Nöjen</TableCell>
-          <TableCell>2000</TableCell>
-          <TableCell>Lock</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Sparande</TableCell>
-          <TableCell>1500</TableCell>
-          <TableCell>Locked</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
+const BudgetTable = () => {
+  const dispatch = useDispatch();
+  const rows = useSelector((state) => state.budget.data);
+
+  const addRow = (key) => {
+    dispatch({ type: budgetActionTypes.ADD_ROW, payload: key });
+  };
+
+  const deleteRow = () => {
+    dispatch({ type: budgetActionTypes.DELETE_ROW });
+  };
+
+  return (
+    <form>
+      <Grid container spacing={4}>
+        {rows.map((row) => (
+          <BudgetRow data={row} key={row.key} />
+        ))}
+        <Grid item xs={6} sm={6}>
+          <Button variant="contained" color="primary" onClick={() => addRow(uuidv4())}>
+            New Row
+          </Button>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          {!!rows.length && (
+            <Button variant="contained" color="secondary" onClick={deleteRow}>
+              Delete Row
+            </Button>
+          )}
+        </Grid>
+      </Grid>
+    </form>
+  );
+};
 
 export default BudgetTable;
